@@ -2,7 +2,7 @@
 // @name         Pay via Square integration
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  Changes Payment button
+// @description  Changes Payment button - Made by Lee Sheedy
 // @match        https://www.mygadgetrepairs.com/admin/index.cfm?p=tickets/invoice-view*
 // @grant        none
 // ==/UserScript==
