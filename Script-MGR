@@ -1,1 +1,18 @@
-# MGR SCRIPT COMING SOON
+// ==UserScript==
+// @name         Pay via Square integration
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Changes Payment button
+// @match        https://www.mygadgetrepairs.com/admin/index.cfm?p=tickets/invoice-view*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    var button = document.querySelector('a.btn.btn-primary.pull-right[target="_ticket_523435"]');
+    if (button) {
+        button.innerText = 'Pay via Square';
+        button.href = 'https://squareup.com/terminal/checkout';
+    }
+})();
