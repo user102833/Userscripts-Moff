@@ -1,0 +1,18 @@
+// ==UserScript==
+// @name         Label Change Script
+// @namespace    http://moffit.com.au/404
+// @version      1.0
+// @description  mgr update
+// @author       Lee Sheedy
+// @match        https://www.mygadgetrepairs.com/admin/index.cfm?p=tickets/*
+// @grant        none
+// ==/UserScript==
+(function() {
+    'use strict';
+    // Find the element containing the text "Shipping Label"
+    var shippingLabelElement = document.querySelector('.dropdown-menu a[data-type="shipping"]');
+    if (shippingLabelElement) {
+        // Replace the text
+        shippingLabelElement.textContent = 'Customer Data Label';
+    }
+})();
