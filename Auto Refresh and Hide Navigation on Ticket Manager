@@ -1,0 +1,76 @@
+// ==UserScript==
+// @name         Ticket Removal Script with Auto Refresh and Element Hide
+// @namespace    https://www.mygadgetrepairs.com
+// @version      1.0
+// @description  For Moff-IT , Lee Sheedy
+// @match        https://www.mygadgetrepairs.com/admin/index.cfm?p=tickets/ticket-monitor
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Hide the specified <nav> element
+    function hideNavigation() {
+        const navigationElement = document.querySelector('nav.navbar.navbar-static-top');
+        if (navigationElement) {
+            navigationElement.style.display = 'none';
+        }
+    }
+
+    // Get the timer element and update its content
+    function updateTimer(timeRemaining) {
+        const timerElement = document.getElementById('timer');
+        if (timerElement) {
+            timerElement.textContent = `Refresh in: ${formatTime(timeRemaining)}`;
+        }
+    }
+
+    // Format the time in MM:SS format
+    function formatTime(time) {
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        return `${padNumber(minutes)}:${padNumber(seconds)}`;
+    }
+
+    // Pad a number with leading zeros if necessary
+    function padNumber(number) {
+        return number.toString().padStart(2, '0');
+    }
+
+    // Refresh the page every 5 minutes
+    function autoRefresh() {
+        let timeRemaining = 300; // Initial time remaining in seconds
+
+        const refreshInterval = setInterval(() => {
+            timeRemaining -= 1;
+            if (timeRemaining <= 0) {
+                clearInterval(refreshInterval);
+                location.reload();
+            } else {
+                updateTimer(timeRemaining);
+            }
+        }, 1000); // 1 second = 1,000 milliseconds
+    }
+
+    // Execute the script after 10 seconds
+    setTimeout(() => {
+        hideNavigation();
+        autoRefresh();
+    }, 10000); // 10 seconds = 10,000 milliseconds
+
+    // Create and style the timer element
+    const timerElement = document.createElement('div');
+    timerElement.id = 'timer';
+    timerElement.style.position = 'fixed';
+    timerElement.style.bottom = '10px';
+    timerElement.style.right = '10px';
+    timerElement.style.backgroundColor = '#000';
+    timerElement.style.color = '#fff';
+    timerElement.style.padding = '5px';
+    timerElement.style.borderRadius = '5px';
+    timerElement.style.fontFamily = 'Arial, sans-serif';
+    timerElement.style.fontSize = '14px';
+    timerElement.style.zIndex = '9999';
+    document.body.appendChild(timerElement);
+})();
