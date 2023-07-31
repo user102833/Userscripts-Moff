@@ -1,0 +1,43 @@
+// ==UserScript==
+// @name         Invoice Popup
+// @namespace    moffit.com.au/404
+// @version      0.1
+// @description  Make Invoice Popup for Darcy
+// @author       Lee Sheedy
+// @match        https://www.mygadgetrepairs.com/admin/index.cfm?p=tickets/ticket-process*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Function to create the popup and handle the button click
+    function createPopup() {
+        var popupMessage = "Have you tested the phone and checked the repair mat?";
+        var userResponse = confirm(popupMessage);
+
+        // If the user clicks "OK" (Yes), you can perform additional actions here
+        if (userResponse) {
+            // Your code for handling the user's "Yes" response goes here
+            // For example, you can perform an action or redirect to another page.
+        }
+    }
+
+    // Function to check if the element contains the specific URL pattern
+    function containsMakeInvoiceURL(element) {
+        var url = element.getAttribute('data-url');
+        return url && url.includes("index.cfm?p=tickets/invoice-process");
+    }
+
+    // Find all clickable elements on the page
+    var clickableElements = document.querySelectorAll('a');
+
+    // Filter the elements to find those with the "Make Invoice" URL pattern
+    var makeInvoiceButtons = Array.from(clickableElements).filter(containsMakeInvoiceURL);
+
+    // Add a click event listener to each button
+    makeInvoiceButtons.forEach(function(button) {
+        button.addEventListener('click', createPopup);
+    });
+
+})();
