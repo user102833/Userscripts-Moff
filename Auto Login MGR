@@ -1,0 +1,24 @@
+// ==UserScript==
+// @name         MyGadgetRepairs Auto Secure Login
+// @namespace    lee sheedy
+// @version      0.1
+// @description
+// @author       lee
+// @match        https://www.mygadgetrepairs.com/admin/login.cfm*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    function clickSecureLogin() {
+        setTimeout(function() {
+            var secureLoginButton = document.querySelector('button.btn.btn-primary.btn-flat');
+            if (secureLoginButton) {
+                secureLoginButton.click();
+            }
+        }, 3000);
+    }
+
+    window.addEventListener('load', clickSecureLogin);
+})();
